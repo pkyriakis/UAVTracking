@@ -1,0 +1,31 @@
+function u_c = LineCon(q_c,gamma)
+
+    K1 = [-50 0 0; 0 -50 0;0 0 -50];     
+    K2 = -[10 0 0; 0 10 0;0 0 0];    
+    
+    K1 = -100*[1 0 0; 0 0 1; 0 0 500];
+    K2 = 500*[10 0 0; 0 10 0; 0 0 0];
+    rc = [q_c(1); q_c(2); q_c(3)];
+    
+%     null_Ic= null([1 2 0]);
+%     nlat = null_Ic(:,1)/norm(null_Ic(:,1));
+%     nlon = null_Ic(:,2)/norm(null_Ic(:,2));
+% 
+%     v = K1*(nlon*nlon'+nlat*nlat')*(r_c-[0 0 1]') + K2*(cross(nlon,nlat));
+
+    R = 1;
+    c = [2.5 3 1]';
+    
+    ac = (rc(1) - c(1))^2/R^2 + (rc(2) - c(2))^2/R^2 - 1;
+    apl = (rc(3) - c(3))/R;
+    
+    acgr = [2*(rc(1)-c(1))/R 2*(rc(2)-c(2))/R 0]';
+    aplgr = [0 0 1/R]';
+    cross = 2/R^2*[rc(2)-c(1) -(rc(1)-c(1)) 0]';
+    
+    v = K1*(ac*acgr + apl*aplgr) + K2*(cross);
+    v = 1.8*v/norm(v);
+
+    u_c = [norm(v)/gamma; atan2(v(2),v(1));acos(v(3)/norm(v))];  
+end
+    
