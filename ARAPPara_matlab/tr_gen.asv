@@ -1,0 +1,22 @@
+% Generate a triangulation by sampling a few points in R^3 and
+% interpolating 
+
+function [TP, TC, qp0] = tr_gen()
+
+[X,Y] = meshgrid(0:1:5);
+Z = rand(6,6);
+
+Xq = 0:.2:5; Yq = Xq;
+[Xq,Yq] = meshgrid(Xq,Yq);
+Zq = interp2(X,Y,Z,Xq,Yq,'spline');
+
+hp=surf2patch(Xq,Yq,Zq,'triangles');
+TP = triangulation(hp.faces,hp.vertices);
+[rp,rc,t]=ARAP(TP);
+TC = triangulation(t,rc);
+
+trimesh(TP.ConnectivityList, TP.Points(:,1),TP.Points(:,2),TP.Points(:,3));
+figure
+trimesh(TC.ConnectivityList, TC.Points(:,1),TC.Points(:,2));
+
+qp0 = [0;];
