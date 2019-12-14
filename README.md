@@ -10,6 +10,7 @@ The code uses the ARAP (As-Rigid-As-Possiple) mesh paramtrization method present
 
 # Requirements 
 Matlab and Simulink 2017 or above. 
+
 [Computational Geometry toolbox](https://www.mathworks.com/help/matlab/computational-geometry.html?s_tid=CRUX_lftnav)
 
 # Run
@@ -19,3 +20,7 @@ The **tri** folder contains the triangulated surface tracking algorithm using th
 
 The **tri_pid** folder is same as above but uses a PID controller. 
 
+# Credits 
+This work was done in [IRAL](https://robotics.ntua.gr/) (Intelligent Robotics and Automation Laboratory) at [National Techincal University of Athens](ntua.gr) as part of a Diploma Thesis. The Thesis can be found [here](http://dspace.lib.ntua.gr/xmlui/bitstream/handle/123456789/41576/kyriakis_tracking.pdf?sequence=1&isAllowed=y) (in greek). 
+
+If you use this code please cite the above papers. 
